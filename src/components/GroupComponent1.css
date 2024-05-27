@@ -1,0 +1,108 @@
+.frame-child1 {
+  width: 347px;
+  height: 439px;
+  position: relative;
+  border-radius: var(--br-mini);
+  background-color: var(--color-gray-200);
+  border: 2px solid var(--color-steelblue-200);
+  box-sizing: border-box;
+  display: none;
+  max-width: 100%;
+}
+.h2,
+.h3 {
+  margin: 0;
+  position: relative;
+  font-weight: 700;
+  font-family: inherit;
+  z-index: 1;
+}
+.h2 {
+  align-self: stretch;
+  font-size: inherit;
+}
+.h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-lightslategray);
+}
+.image,
+.rectangle-frame {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.image {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-4xs);
+}
+.rectangle-frame {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 0 0 var(--padding-lg);
+}
+.image-38-icon {
+  height: 156px;
+  width: 156px;
+  position: relative;
+  object-fit: cover;
+  z-index: 2;
+}
+.ellipse-icon {
+  height: 78.5px;
+  width: 35.5px;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.text {
+  width: 230px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: var(--padding-6xl) 0 0;
+  box-sizing: border-box;
+  position: relative;
+}
+.group-div,
+.text-wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+.text-wrapper {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.group-div {
+  width: 347px;
+  border-radius: var(--br-mini);
+  background-color: var(--color-gray-200);
+  border: 2px solid var(--color-steelblue-200);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-24xl) var(--padding-18xl) var(--padding-59xl)
+    var(--padding-xl);
+  gap: var(--gap-35xl);
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-white);
+  font-family: var(--font-comfortaa);
+}
+@media screen and (max-width: 450px) {
+  .h2 {
+    font-size: var(--font-size-lgi);
+  }
+  .group-div {
+    gap: var(--gap-35xl);
+    padding-top: var(--padding-9xl);
+    padding-bottom: var(--padding-32xl);
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "galaxyexpress",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mantine/carousel": "^7.5.3",
+    "@mantine/core": "^7.5.3",
+    "@mantine/hooks": "^7.5.3",
+    "@react-google-maps/api": "^2.19.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^16.11.14",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "babel-preset-react-app": "^10.0.1",
+    "embla-carousel": "^8.0.0",
+    "embla-carousel-autoplay": "^7.1.0",
+    "embla-carousel-react": "^8.0.0",
+    "gsap": "^3.12.5",
+    "leaflet": "^1.9.4",
+    "mapbox-gl": "^3.1.2",
+    "react": "^18.2.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-map-gl": "^7.1.7",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "5.0.1",
+    "react-scroll": "^1.9.0",
+    "react-scroll-horizontal": "^1.6.6",
+    "react-scrollbar": "^0.5.6",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "root": true
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}

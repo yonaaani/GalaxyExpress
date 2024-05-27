@@ -1,0 +1,311 @@
+.rectangle-button-shape {
+  position: absolute;
+  top: -0.5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.frame-subscription-form,
+.group-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 66.5px;
+  height: 4px;
+}
+.group-button-container {
+  top: 1003px;
+  width: 318px;
+  height: 1px;
+}
+
+.spacex-3d-model-render {
+  position: absolute; 
+  animation: rocketFly 0.4s cubic-bezier(1, 0.41, 0.68, 1) forwards; 
+}
+@keyframes rocketFly {
+  0% {
+    transform: translate(300px, 500px); /* Початкова позиція - праворуч та внизу екрану */
+  }
+  100% {
+    transform: translate(0, -50px); /* Кінцева позиція - ліворуч та вгору за межі екрану */
+  }
+}
+.spacex-3d-model-render,
+.star-animate-icon1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* Початкова прозорість - елементи невидимі */
+  }
+  100% {
+    opacity: 1; /* Кінцева прозорість - елементи видимі */
+  }
+}
+.star-animate-icon1 {
+  left: -6px;
+  top: -73px;
+  transform: scale(1.173);
+  animation: fadeIn 1.3s ease-in forwards;
+}
+.wrapper-star-animate1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.div6 {
+  position: absolute;
+  top: 750px;
+  left: 494px;
+  display: inline-block;
+  width: 205px;
+  height: 42px;
+  z-index: 1;
+}
+.group-5logo-1-1,
+.image-d {
+  position: absolute;
+  left: 274px;
+}
+.image-d {
+  top: 246.53px;
+  background: linear-gradient(
+    269.86deg,
+    #f9ffff,
+    #f7ffff 17.97%,
+    #e8eff9 44.54%,
+    #dde3ed 55.29%,
+    #c8ced8 74.78%,
+    #c0c6cd 80.13%,
+    #b5bcc5 87.69%,
+    #acb2bb
+  );
+  width: 137px;
+  height: 20px;
+  transform: rotate(-43.63deg);
+  transform-origin: 0 0;
+  z-index: 1;
+}
+.group-5logo-1-1 {
+  top: 153px;
+  width: 111.4px;
+  height: 106.7px;
+  object-fit: contain;
+  z-index: 2;
+}
+.image-placeholder-contact {
+  position: absolute;
+  top: 113px;
+  left: 7px;
+  width: 908px;
+  height: 850px;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-100);
+  font-family: var(--font-dela-gothic-one);
+}
+.frame-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0 var(--br-6xs) var(--br-6xs) 0;
+  background-color: var(--color-gray-200);
+  border: 0.7px solid var(--color-steelblue-200);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.log-in {
+  position: absolute;
+  top: 20px;
+  left: 14.2px;
+  font-size: var(--font-size-5xs);
+  display: inline-block;
+  font-family: var(--font-lexend-zetta);
+  color: var(--color-white);
+  text-align: left;
+  width: 46px;
+  height: 10px;
+  white-space: nowrap;
+  z-index: 1;
+}
+.rectangle-container {
+  cursor: pointer;
+  border: 0.7px solid var(--color-steelblue-200);
+  padding: 0;
+  background-color: var(--color-gray-200);
+  position: absolute;
+  top: 30px;
+  left: 634px;
+  border-radius: 0 var(--br-6xs) var(--br-6xs) 0;
+  box-sizing: border-box;
+  width: 75.2px;
+  height: 50px;
+  z-index: 3;
+}
+.rectangle-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-6xs);
+  background-color: var(--color-white);
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.sign-up {
+  position: absolute;
+  top: 26px;
+  left: 15px;
+  font-size: var(--font-size-5xs);
+  display: inline-block;
+  font-family: var(--font-lexend-zetta);
+  color: var(--color-gray-200);
+  text-align: left;
+  width: 52px;
+  height: 10px;
+  z-index: 1;
+}
+.group-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 24px;
+  left: 553px;
+  border-radius: var(--br-6xs);
+  width: 81px;
+  height: 63px;
+  z-index: 4;
+}
+.spaceship {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1106.7px;
+  height: 1123px;
+  z-index: 1;
+}
+.text-headline-subscribe-parent {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 111px;
+  width: 1273.4px;
+  z-index: 2;
+}
+.text-headline-link {
+  width: 1384px;
+  height: 1264px;
+  position: absolute;
+  margin: 0 !important;
+  top: 34px;
+  right: -448px;
+  text-align: left;
+  font-size: var(--font-size-smi);
+  color: var(--color-white);
+  font-family: var(--font-comfortaa);
+}
+
+/* Анімація */
+
+/* Стилі для rectangle-container та group-button при наведенні на rectangle-container, тобто на LoginIn */
+.rectangle-container:hover {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 24px;
+  border-radius: var(--br-6xs);
+  width: 81px;
+  height: 63px;
+  z-index: 4;
+}
+
+.rectangle-container:hover + .group-button {
+  cursor: pointer;
+  border: 0.7px solid var(--color-steelblue-200);
+  padding: 0;
+  background-color: var(--color-gray-200);
+  position: absolute;
+  left: 560px;
+  top: 30px;
+  border-radius: var(--br-6xs) 0 0 var(--br-6xs);
+  box-sizing: border-box;
+  width: 75.2px;
+  height: 50px;
+  z-index: 3;
+}
+
+/* Стилі для group-button та rectangle-container при наведенні на group-button, тобто на SignUp*/
+.group-button:hover {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 24px;
+  border-radius: var(--br-6xs);
+  width: 81px;
+  height: 63px;
+  z-index: 4;
+}
+
+.group-button:hover ~ .rectangle-container {
+  cursor: pointer;
+  border: 0.7px solid var(--color-steelblue-200);
+  padding: 0;
+  background-color: var(--color-gray-200);
+  position: absolute;
+  left: 560px;
+  top: 30px;
+  border-radius: var(--br-6xs) 0 0 var(--br-6xs);
+  box-sizing: border-box;
+  width: 75.2px;
+  height: 50px;
+  z-index: 3;
+}
+
+.rectangle-container:hover .log-in {
+  position: absolute;
+  top: 26px;
+  right: 10px;
+  font-size: var(--font-size-5xs);
+  display: inline-block;
+  font-family: var(--font-lexend-zetta);
+  color: var(--color-gray-200);
+  text-align: left;
+  width: 52px;
+  height: 10px;
+  z-index: 1;
+}
+
+.rectangle-container:hover + .group-button .sign-up {
+  position: absolute;
+  top: 20px;
+  font-size: var(--font-size-5xs);
+  display: inline-block;
+  font-family: var(--font-lexend-zetta);
+  color: var(--color-white);
+  text-align: left;
+  width: 46px;
+  height: 10px;
+  white-space: nowrap;
+  z-index: 1;
+}

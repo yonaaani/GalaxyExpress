@@ -1,0 +1,99 @@
+.group-u,
+.logo-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.logo-frame {
+  overflow-x: auto;
+  align-items: flex-end;
+  padding: var(--padding-5xl) 0 var(--padding-7xl) var(--padding-5xl);
+  gap: var(--gap-3xl);
+  z-index: 3;
+}
+.group-u {
+  align-items: flex-start;
+  padding: 0 0 var(--padding-xl) var(--padding-xs);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-white);
+  font-family: var(--font-comfortaa);
+  user-select: none;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+@media screen and (max-width: 750px) {
+  .logo-frame {
+    padding-top: var(--padding-xl);
+    padding-bottom: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+
+.arrows{
+  position: absolute;
+  top: 1315px;
+  left: 65px;
+  z-index: 10 !important;
+}
+
+.arrows2{
+  position: absolute;
+  top: 1315px;
+  left: 1425px;
+  z-index: 10 !important;
+}
+
+/**/
+
+.rectangle-button-shape {
+  position: absolute;
+  top: -0.5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.frame-subscription-form,
+.group-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 66.5px;
+  height: 4px;
+}
+.group-button-container {
+  position: relative;
+  top: 1rem;
+  width: 318px;
+  height: 1px;
+}
+
+.div7 {
+  position: absolute;
+  top: 1108px;
+  left: 720px;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  text-align: left;
+  display: inline-block;
+  width: 41px;
+  height: 17px;
+  z-index: 1;
+  font-family: var(--font-lexend-zetta);
+}
+
+.span2 {
+  font-family: var(--font-brygada-1918);
+}
+.span3 {
+  font-family: var(--font-comfortaa);
+}
+.span4 {
+  font-family: var(--font-brygada-1918);
+}

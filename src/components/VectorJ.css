@@ -1,0 +1,150 @@
+.star-animate-icon2 {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 1;
+  object-fit: contain;
+  position: absolute;
+  left: -6px;
+  top: -96px;
+  transform: scale(1.227);
+}
+.b6,
+.div8,
+.wrapper-star-animate2 {
+  position: absolute;
+  margin: 0 !important;
+}
+.wrapper-star-animate2 {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.b6,
+.div8 {
+  left: -91px;
+  z-index: 2;
+}
+.b6 {
+  width: 278px;
+  height: 23px;
+  top: 243px;
+  display: inline-block;
+  color: var(--color-white);
+}
+.div8 {
+  top: 281px;
+  font-size: var(--font-size-smi);
+  font-weight: 600;
+}
+.frame-q-icon {
+  position: absolute;
+  top: -5;
+  left: 0;
+  border-radius: var(--br-xs);
+  width: 426px;
+  height: 584px;
+}
+.frame-p-child {
+  position: absolute;
+  top: 18px;
+  left: 260px;
+  width: 245.2px;
+  height: 246.1px;
+  object-fit: contain;
+  z-index: 1;
+}
+.frame-p {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0.2px;
+  bottom: 0.1px;
+  left: 0;
+}
+.frame-p-wrapper {
+  height: 664.1px;
+  width: 505.2px;
+  position: relative;
+  max-width: 100%;
+  z-index: 2;
+}
+.text-n {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-45xl);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.b7,
+.b8 {
+  position: relative;
+  z-index: 2;
+}
+.b7{
+  left: -7px;
+}
+.frame-s,
+.vector-j {
+  width: 289px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 var(--padding-xl) 0 0;
+  box-sizing: border-box;
+  gap: var(--gap-xl);
+  font-size: var(--font-size-sm);
+}
+.vector-j {
+  width: 908px;
+  margin: 0 !important;
+  position: absolute;
+  right: -186px;
+  bottom: 325px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--padding-13xl) var(--padding-5xs) var(--padding-xl);
+  gap: var(--gap-99xl);
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-lightslategray);
+  font-family: var(--font-comfortaa);
+}
+
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: #fff;
+}
+
+.dropdown-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.group-frame-icon {
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
