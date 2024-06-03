@@ -211,15 +211,7 @@
 
 
 
-.div12 {
-  align-self: stretch;
-  height: 123px;
-  position: relative;
-  font-weight: 600;
-  display: inline-block;
-  flex-shrink: 0;
-  z-index: 3;
-}
+
 .frame-child9 {
   height: 58px;
   width: 242px;
@@ -315,8 +307,7 @@
   z-index: 2;
 }
 .group-logo-container,
-.main-content-frame,
-.text2 {
+.main-content-frame {
   display: flex;
   align-items: flex-start;
   max-width: 100%;
@@ -326,24 +317,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.group-logo-container,
-.text2 {
+.group-logo-container {
   width: 30px;
   justify-content: flex-end;
-}
-.text2 {
-  width: 890px;
-  margin: 0 !important;
-  position: absolute;
-
-  left: 0;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 var(--padding-xl) var(--padding-33xl);
-  box-sizing: border-box;
-  gap: var(--gap-342xl);
-  text-align: left;
-  font-size: var(--font-size-base);
-  color: var(--color-lightslategray);
-  font-family: var(--font-comfortaa);
 }

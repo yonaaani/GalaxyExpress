@@ -565,6 +565,8 @@
   border: 2px solid #9499C3;
   border-top: none;
   z-index: 3;
+  max-height: 150px; 
+  overflow-y: auto;
 }
 
 .dropdown-list ul {
@@ -579,5 +581,41 @@
 }
 
 .dropdown-list ul li:hover {
-  background-color: #F5F5F5;
+  background-color: #9499C3;
+}
+
+
+
+.dropdown-container-search {
+  position: relative;
+}
+
+.dropdown-list-search {
+  position: absolute;
+  top: 12px;
+  left: -303px;
+  width: 413px;
+  max-height: 150px; 
+  overflow-y: auto;
+  background-color: #fff;
+  border: 2px solid #9499C3;
+  border-top: none;
+  z-index: 3;
+  padding: 10px 15px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.dropdown-list-search-li {
+  padding: 10px 15px; /* Доданий padding між кожним елементом */
+  cursor: pointer;
+  list-style: none; /* Забрані крапки */
+}
+
+.dropdown-list-search ul li:not(:last-child) {
+  border-bottom: 1px solid #9499C3; /* Доданий розділювач між кожним елементом */
+}
+
+.dropdown-list-search-li:hover {
+  background-color: #9499C3;
 }

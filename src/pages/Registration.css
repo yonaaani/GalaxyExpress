@@ -1,0 +1,584 @@
+.h1-reg {
+    margin: 0;
+    position: relative;
+    font-size: inherit;
+    font-weight: 700;
+    font-family: inherit;
+    z-index: 1;
+  }
+  .h1-reg,
+  .p-reg,
+  .parent-reg {
+    align-self: stretch;
+    margin-top: 110px;
+  }
+  .p-reg {
+    margin: 0;
+    position: relative;
+    font-size: 16px;
+    color: var(--color-lightslategray);
+    z-index: 1;
+    width: 450px;
+  }
+  .parent-reg {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+  .ivanna-stashko-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 3px;
+  }
+  .password-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 3px;
+    margin-left: 20px;
+  }
+  .login-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 5px;
+  }
+  .surname-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 35px;
+  }
+  .name-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    left: -15px;
+  }
+  .fathername-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 60px;
+  }
+  .email-reg {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 5px;
+  }
+  .hide-fathername {
+    z-index: 5;
+    display: flex;
+    align-items: center;
+  }
+  .password-reg2 {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 3px;
+    margin-left: 110px;
+  }
+
+  .checkbox-input {
+    /* Користувальницькі стилі для чекбоксу */
+    appearance: none; /* Скасування стандартного відображення */
+    width: 20px; /* Ширина */
+    height: 20px; /* Висота */
+    border: 1px solid #FFFFFF; /* Рамка */
+    background-color: #15183D; /* Колір фону */
+    border-radius: 4px; /* Радіус кутів */
+    margin-right: 10px; /* Відступ справа */
+    position: relative;
+  }
+  .checkbox-input::before {
+    content: ""; 
+    position: absolute; 
+    width: 10px; /* Розмір галочки */
+    height: 10px;
+    border: 1px solid #FFFFFF; /* Товщина ліній галочки */
+    border-top: none; /* Видаляємо верхню лінію */
+    border-left: none; /* Видаляємо ліву лінію */
+    transform: rotate(45deg); /* Повертаємо на 45 градусів, щоб утворити галочку */
+    opacity: 0; /* Початково робимо галочку невидимою */
+    transition: opacity 0.2s; /* Додаємо плавний перехід */
+    left: 4px;
+  }
+  
+  .checkbox-input:checked::before {
+    opacity: 1; /* При відмітці показуємо галочку */
+  }
+  .checkbox-input:focus {
+    /* Стилі для активованого чекбоксу */
+    outline: none; /* Скасування стандартного контуру */
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2); /* Тінь, коли чекбокс активний */
+  }
+
+  .frame-parent-reg,
+  .ivanna-stashko-wrapper-reg,
+  .registration-inner-reg {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .ivanna-stashko-wrapper-reg {
+    width: 297px;
+    flex-direction: row;
+    padding: 0 77px;
+    box-sizing: border-box;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-300);
+  }
+  .frame-parent-reg,
+  .registration-inner {
+    flex-direction: column;
+  }
+  .frame-parent-reg {
+    align-self: stretch;
+    gap: 112px;
+  }
+  .registration-inner-reg {
+    width: 434px;
+    padding: 230px 0 0;
+    box-sizing: border-box;
+    min-width: 434px;
+    max-width: 100%;
+  }
+  .image-22-icon-reg,
+  .star-animate-icon-reg {
+    position: absolute;
+    top: 155px;
+    left: 728px;
+    width: 851.8px;
+    height: 909.7px;
+    object-fit: contain;
+    z-index: 1;
+  }
+  .image-22-icon-reg {
+    top: 543px;
+    left: 559px;
+    width: 21px;
+    height: 21px;
+    object-fit: cover;
+  }
+  .star-animate-icon1-reg,
+  .wrapper-star-animate-reg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .star-animate-icon1-reg {
+    object-fit: contain;
+    left: 40px;
+    transform: scale(1.092);
+  }
+  .wrapper-star-animate-reg {
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .group-5logo-1 {
+    position: absolute;
+    top: 88px;
+    left: 103px;
+    width: 323px;
+    height: 27px;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .frame-child-reg,
+  .wrapper-star-animate-parent-reg {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 908px;
+    height: 850px;
+  }
+  .frame-child-reg {
+    
+    left: -223px;
+    width: 1096.1px;
+    height: 1101.1px;
+    object-fit: contain;
+    z-index: 1;
+  }
+  .star-animate-parent-reg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin: 0 !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .b-reg,
+  .div-reg {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    z-index: 4;
+  }
+  .b-reg {
+    width: 349px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+  .div-reg {
+    flex: 1;
+  }
+  .frame-item-reg,
+  .wrapper-reg {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .wrapper-reg {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-5xs) 2px;
+  }
+  .frame-item-reg {
+    height: 44px;
+    width: 410px;
+    position: relative;
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gainsboro-200);
+    display: none;
+    z-index: 0;
+  }
+  .image-36-icon-reg {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    object-fit: cover;
+    z-index: 5;
+  }
+  .country-code-reg {
+    align-self: stretch;
+    position: relative;
+    font-weight: 700;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  .country-code-wrapper-reg {
+    width: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3px 0 0;
+    box-sizing: border-box;
+  }
+  .frame-inner-reg,
+  .input-box-reg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  .input-box-reg {
+    border-radius: 15px;
+    background-color: #15183d;
+    border: 1px solid #44456a;
+    z-index: 3;
+  }
+  .frame-inner-reg {
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    border: 0.7px solid var(--color-gray-300);
+    display: none;
+  }
+  .input-icon-reg,
+  .rectangle-group-reg {
+    position: absolute;
+    top: 15px;
+    left: 18px;
+    width: 6px;
+    height: 12px;
+    z-index: 1;
+  }
+  .rectangle-group-reg {
+    top: 45px;
+    left: 29px;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    border: 0.7px solid var(--color-gray-300);
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    z-index: 4;
+  }
+  .input-box-parent-reg {
+    height: 1021px;
+    width: 667px;
+    position: fixed;
+    margin: 0 !important;
+    top: -20px;
+    left: 870px;
+  }
+  .frame-wrapper-reg,
+  .rectangle-parent-reg {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .rectangle-parent-reg {
+    flex: 1;
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gainsboro-200);
+    padding: 9px 18px;
+    position: relative;
+    gap: 10px;
+    z-index: 4;
+  }
+  .rectangle-parent-reg2 {
+    flex: 1;
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gainsboro-200);
+    padding: 9px 18px;
+    position: relative;
+    gap: 10px;
+    z-index: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .frame-wrapper-reg {
+    align-self: stretch;
+    padding: 0 0 var(--padding-5xs);
+    font-size: var(--font-size-sm);
+  }
+  .span-reg {
+    text-decoration: underline;
+  }
+  .p1-reg {
+    margin: 0;
+    flex: 1;
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    z-index: 4;
+  }
+  .container-reg {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 11px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .rectangle-div-reg {
+    height: 43px;
+    width: 211px;
+    position: relative;
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    display: none;
+  }
+  .b1-reg {
+    position: relative;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 93px;
+    z-index: 1;
+  }
+  .frame-container-reg,
+  .rectangle-container-reg {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .rectangle-container-reg {
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    justify-content: flex-start;
+    padding: 16px 58px 14px;
+    cursor: pointer;
+    z-index: 4;
+  }
+  .frame-container-reg {
+    align-self: stretch;
+    justify-content: center;
+    padding: 0 var(--padding-xl) 0 21px;
+    font-size: 12px;
+    color: var(--color-gray-300);
+  }
+  .group-reg,
+  .registration {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .group-reg {
+    width: 645px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 256px 106px 368px 129px;
+    gap: 13px;
+    min-width: 645px;
+    max-width: 100%;
+    font-size: var(--font-size-smi);
+    color: var(--color-lightslategray);
+    z-index: 3;
+    background-color: #15183d;
+  }
+  .group-reg2 {
+    width: 645px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 306px 106px 368px 129px;
+    gap: 13px;
+    min-width: 645px;
+    max-width: 100%;
+    font-size: var(--font-size-smi);
+    color: var(--color-lightslategray);
+    z-index: 3;
+    background-color: #15183d;
+  }
+  .group-reg3 {
+    width: 645px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 236px 106px 368px 129px;
+    gap: 13px;
+    min-width: 645px;
+    max-width: 100%;
+    font-size: var(--font-size-smi);
+    color: var(--color-lightslategray);
+    z-index: 3;
+    background-color: #15183d;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .registration {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-gray-300);
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0 0 193px;
+    line-height: normal;
+    letter-spacing: normal;
+    gap: 20px;
+    text-align: left;
+    font-size: 32px;
+    color: var(--color-white);
+    font-family: var(--font-comfortaa);
+    height: 100vh;
+  }
+  @media screen and (max-width: 1300px) {
+    .group-reg,
+    .registration-inner-reg {
+      flex: 1;
+    }
+    .registration {
+      flex-wrap: wrap;
+      padding-left: var(--padding-xl);
+      padding-right: var(--padding-xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 1125px) {
+    .group-reg {
+      min-width: 100%;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .h1-reg {
+      font-size: 26px;
+    }
+    .registration-inner-reg {
+      padding-top: 149px;
+      box-sizing: border-box;
+      min-width: 100%;
+    }
+    .group-reg {
+      padding: 238px 53px 239px 64px;
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .h1-reg {
+      font-size: 19px;
+    }
+    .parent-reg {
+      gap: 16px;
+    }
+    .ivanna-stashko-wrapper-reg {
+      padding-left: var(--padding-xl);
+      padding-right: var(--padding-xl);
+      box-sizing: border-box;
+    }
+    .frame-parent-reg {
+      gap: 56px;
+    }
+    .b-reg {
+      font-size: 18px;
+    }
+    .group-reg {
+      padding: 155px var(--padding-xl);
+      box-sizing: border-box;
+    }
+}

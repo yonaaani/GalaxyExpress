@@ -1,0 +1,14 @@
+export {default as Avatar} from "./avatar.jfif";
+export {default as Vector} from "./Vector.png";
+export {default as Bell} from "./bell.png";
+export {default as Gear} from "./gear.png";
+export {default as Message} from "./message.png";
+export {default as Basket} from "./basket.png";
+export {default as Flag} from "./flag.png";
+export {default as List} from "./List.png";
+export {default as Home} from "./home.png";
+export {default as Logo} from "./Logo.png";
+export {default as Plus} from "./plus.png";
+export {default as Qua} from "./qua.png";
+export {default as Statistic} from "./statistic.png";
+export {default as VectorBlack} from "./VectorBlack.png";

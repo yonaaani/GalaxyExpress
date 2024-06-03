@@ -8,8 +8,7 @@ const RegistrationFrame = () => {
         <div className="main-content-frame">
           <div className="email-input-frame-wrapper">
             <div className="email-input-frame">
-              <div className="confirm-button-frame" />
-              <div className="email-input-frame-child" />
+          
             </div>
           </div>
           </div>

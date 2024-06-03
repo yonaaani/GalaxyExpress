@@ -233,17 +233,6 @@
 }
 
 
-
-
-.div12 {
-  align-self: stretch;
-  height: 123px;
-  position: relative;
-  font-weight: 600;
-  display: inline-block;
-  flex-shrink: 0;
-  z-index: 3;
-}
 .frame-child9 {
   height: 58px;
   width: 242px;

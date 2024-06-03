@@ -5,26 +5,89 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import "./Vector.css";
 
+const baseUrl = 'http://localhost:4443/api'; // Змініть це на адресу вашого сервера
+
+export const getPostBranches = async () => {
+  try {
+    const response = await fetch('http://localhost:4443/api/PostBranch', {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch post branches');
+    }
+
+    const data = await response.json();
+
+    return data.map(branch => ({
+      name: branch.localAddress,
+      coordinates: [branch.x, branch.y] // Поміняємо координати місцями
+    }));
+  } catch (error) {
+    console.error('Error fetching post branches:', error);
+    throw error;
+  }
+};
+
+export const getParcelMachines = async () => {
+  try {
+    const response = await fetch('http://localhost:4443/api/ParcelMachine', {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch parcel machines');
+    }
+
+    const data = await response.json();
+
+    return data.map(machine => ({
+      name: machine.localAddress,
+      coordinates: [machine.x, machine.y]
+    }));
+  } catch (error) {
+    console.error('Error fetching parcel machines:', error);
+    throw error;
+  }
+};
+
+
+
 const Vector = () => {
   const [groupCheckboxChecked, setGroupCheckboxChecked] = useState(true);
 
   const [showPostamats, setShowPostamats] = useState(false);
   const [showDepartments, setShowDepartments] = useState(true);
 
-  const initialCoordinates = [49.6, 30.7]; 
+  const [locations, setLocations] = useState([]);
+  const [parcelMachines, setParcelMachines] = useState([]);
 
-  const locations = [
-    { name: 'Kyiv', coordinates: [50.4501, 30.5234] },
-    { name: 'Lviv', coordinates: [49.8397, 24.0297] },
-    { name: 'Chernivtsi', coordinates: [48.2921, 25.9352] },
-  ];
+  const [initialCoordinates, setInitialCoordinates] = useState([49.6, 30.7]);
+  const [zoom, setZoom] = useState(7);
 
-  const additionalLocation = { name: 'Poshtomat', coordinates: [48.3921, 25.7352] };
+  const [searchText, setSearchText] = useState('');
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
+  const searchRef = useRef(null);
+  const mapRef = useRef(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+
+  // const locations = [
+  //   { name: 'Kyiv', coordinates: [50.4501, 30.5234] },
+  //   { name: 'Lviv', coordinates: [49.8397, 24.0297] },
+  //   { name: 'Chernivtsi', coordinates: [48.2921, 25.9352] },
+  // ];
+
+  // const additionalLocation = { name: 'Poshtomat', coordinates: [48.3921, 25.7352] };
 
   const allLocations = [
-    ...(showPostamats ? [additionalLocation] : []),
+    ...(showPostamats ? parcelMachines : []),
     ...(showDepartments ? locations : [])
-];
+  ];
 
   // Custom marker icon
   const customMarkerIcon = new L.Icon({
@@ -81,6 +144,83 @@ const Vector = () => {
     setShowDepartments(false);
   };
 
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const branches = await getPostBranches();
+        setLocations(branches);
+      } catch (error) {
+        console.error('Error fetching post branches:', error);
+      }
+    };
+
+    const fetchParcelMachines = async () => {
+      try {
+        const machines = await getParcelMachines();
+        setParcelMachines(machines);
+      } catch (error) {
+        console.error('Error fetching parcel machines:', error);
+      }
+    };
+
+    fetchLocations();
+    fetchParcelMachines();
+  }, []);
+
+  const handleSearchChange = event => {
+    setSearchText(event.target.value);
+    setIsOpenSearch(true);
+  };
+
+  const filteredLocations = allLocations.filter(location =>
+    location.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const handleClickOutsideSearch = event => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setIsOpenSearch(false);
+    }
+  };
+  
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutsideSearch);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideSearch);
+    };
+  }, []);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault(); 
+      setSelectedIndex((prevIndex) => (prevIndex === null ? 0 : Math.min(prevIndex + 1, filteredLocations.length - 1)));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault(); 
+      setSelectedIndex((prevIndex) => (prevIndex === null ? 0 : Math.max(prevIndex - 1, 0)));
+    } else if (event.key === 'Enter') {
+      event.preventDefault(); 
+      if (selectedIndex !== null) {
+        handleLocationClick(filteredLocations[selectedIndex].coordinates);
+      }
+    }
+  };
+
+  const handleLocationClick = (coordinates, index) => {
+    setIsOpenSearch(false); 
+    setInitialCoordinates(coordinates); 
+    setZoom(13);
+    setSelectedItemIndex(index);
+    console.log('Redirecting to coordinates:', coordinates);
+  };
+  
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.setView(initialCoordinates, zoom); 
+    }
+  }, [initialCoordinates, zoom]);
+  
+  const handleSearch = () => {
+    handleSearchChange({ target: { value: searchText } });
+  };
   
   return (
     <section className="vector">
@@ -122,9 +262,9 @@ const Vector = () => {
           {isOpen && (
         <div className="dropdown-list">
           <ul>
-          {allLocations.map(location => (
-                  <li key={location.name}>{location.name}</li>
-                ))}
+            {allLocations.map((location, index) => (
+              <li key={location.name} onClick={() => handleLocationClick(location.coordinates, index)}>{location.name}</li>
+            ))}
           </ul>
         </div>
       )}
@@ -162,22 +302,20 @@ const Vector = () => {
               </div>
               <div className="group-frame">
                 <div className="group-frame-child" />
-                <MapContainer center={initialCoordinates} zoom={7} style={{ height: '555px', width: '100%', borderRadius:15, zIndex: 1 }}>
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
-            
-            
-          />
-          {allLocations.map((location, index) => (
-            <Marker
-            key={index}
-            position={location.coordinates}
-            icon={locations.includes(location) ? customMarkerIcon : postamatMarkerIcon}
-          >
-            <Popup>{location.name}</Popup>
-          </Marker>
-          ))}
-        </MapContainer>
+                <MapContainer ref={mapRef} center={initialCoordinates} zoom={zoom} style={{ height: '555px', width: '100%', borderRadius:15, zIndex: 1 }}>
+                  <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+                  />
+                  {allLocations.map((location, index) => (
+                    <Marker
+                      key={index}
+                      position={location.coordinates}
+                      icon={parcelMachines.some(machine => machine.name === location.name) ? postamatMarkerIcon : customMarkerIcon}
+                    >
+                      <Popup>{location.name}</Popup>
+                    </Marker>
+                  ))}
+                </MapContainer>
                 
                 
                 <div className="frame-group1"  style={{ zIndex: 2 }}>
@@ -187,8 +325,19 @@ const Vector = () => {
                         className="search-drum-kits"
                         placeholder={showPostamats && showDepartments ? 'Знайти пункти видачі' : showPostamats ? 'Знайти поштомати' : showDepartments ? 'Знайти відділення' : ''}
                         type="text"
+                        value={searchText}
+                        onChange={handleSearchChange}
                       />
-                      <div className="phmagnifying-glass-bold-wrapper">
+                      {isOpenSearch && (
+                      <div className="dropdown-container-search" ref={searchRef} onKeyDown={handleKeyDown}>
+                        <ul className="dropdown-list-search">
+                          {filteredLocations.map((location, index) => (
+                            <li className="dropdown-list-search-li" key={location.name} onClick={() => handleLocationClick(location.coordinates, index)}>{location.name}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                      <div className="phmagnifying-glass-bold-wrapper" onClick={() => handleSearch()}>
                         <img
                           className="phmagnifying-glass-bold-icon"
                           alt=""
@@ -196,11 +345,9 @@ const Vector = () => {
                         />
                       </div>
                     </div>
-                   
-                   
-                  </div>
-                  
+                  </div>  
                 </div>
+
               </div>
               <img
                 className="rectangle-frame-child"

@@ -1,0 +1,24 @@
+.editAccountPage {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+.slidebar {
+    width: 20%;
+    height: 100%;
+    background-color: white;
+}
+.edit-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    background-color: #15183D; 
+  }
+  
+  .edit-page-information {
+    flex: 1;
+    background-color: #13152E;
+  }

@@ -30,6 +30,9 @@
   display: inline-block;
   flex-shrink: 0;
   z-index: 3;
+  font-size: 16px;
+  color: #9499C3;
+  font-weight: 100;
 }
 .frame-child9 {
   height: 58px;
@@ -73,8 +76,8 @@
 .rectangle-parent6:hover .b12{
   color: var(--color-white);
 }
-.container,
-.image1 {
+.container-text1,
+.image1-text1 {
   width: 386px;
   display: flex;
   flex-direction: column;
@@ -82,7 +85,7 @@
   justify-content: flex-start;
   max-width: 100%;
 }
-.image1 {
+.image1-text1 {
   width: 630px;
   flex-direction: row;
 }
@@ -127,7 +130,7 @@
 }
 .group-logo-container,
 .main-content-frame,
-.text2 {
+.text2-text1 {
   display: flex;
   align-items: flex-start;
   max-width: 100%;
@@ -139,12 +142,12 @@
   gap: var(--gap-8xs);
 }
 .group-logo-container,
-.text2 {
+.text2-text1 {
   width: 630px;
   flex-direction: row;
   justify-content: flex-end;
 }
-.text2 {
+.text2-text1 {
   width: 890px;
   margin: 0 !important;
   position: absolute;

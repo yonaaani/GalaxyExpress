@@ -1,15 +1,8 @@
 import { useCallback } from "react";
 import "./TextHeadlineLink.css";
+import { Link } from "react-router-dom";
 
 const TextHeadlineLink = () => {
-
-  const onGroupButtonClick = useCallback(() => {
-    // Please sync "Authorization" to the project
-  }, []);
-
-  const onGroupButton1Click = useCallback(() => {
-    // Please sync "Registration" to the project
-  }, []);
 
   return (
     <section className="text-headline-link">
@@ -28,13 +21,13 @@ const TextHeadlineLink = () => {
             src="/spacex-3d-model-render.png"
           />
           
-          <button className="rectangle-container" onClick={onGroupButtonClick}>
+          <button className="rectangle-container">
             <div className="frame-inner" />
-            <b className="log-in">Log In</b>
+            <Link to="/authorization"><b className="log-in">Log In</b></Link>
           </button>
-          <button className="group-button" onClick={onGroupButton1Click}>
+          <button className="group-button">
             <div className="rectangle-div" />
-            <b className="sign-up">{`Sign Up `}</b>
+            <Link to="/registration"><b className="sign-up">{`Sign Up `}</b></Link>
           </button>
         </div>
       </div>

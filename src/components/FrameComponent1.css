@@ -1,0 +1,124 @@
+.div3-auth,
+.h31-auth {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.h31-auth {
+  margin-left: 130px;
+  width: 315px;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  padding-right: var(--padding-xl);
+  top: -30px;
+}
+.div3-auth {
+  align-self: stretch;
+  height: 35px;
+  flex-shrink: 0;
+  padding-right: var(--padding-2xl);
+  z-index: 4;
+  align-self: stretch;
+  font-size: 16px;
+  color: var(--color-lightslategray);
+  width: 300px;
+  top: -30px;
+}
+.li,
+.li1,
+.li2 {
+  margin-bottom: 9px;
+}
+.ul-auth {
+  margin: 0;
+  font-family: inherit;
+  font-size: 14px;
+  padding-left: var(--padding-lgi);
+  color: #9499C3;
+  width: 400px;
+  top: -30px;
+}
+.div4-auth,
+.parent1-auth {
+  align-self: stretch;
+  top: -30px;
+}
+.parent1-auth{
+    margin-left: 130px;
+    top: -30px;
+}
+.div4-auth {
+  height: 103px;
+  position: relative;
+  font-size: var(--font-size-sm);
+  display: inline-block;
+  flex-shrink: 0;
+  z-index: 4;
+  margin-top: -1px;
+}
+.parent1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: var(--font-size-base);
+  color: var(--color-lightslategray);
+}
+.frame-child2-auth {
+  height: 43px;
+  width: 211px;
+  position: relative;
+  border-radius: var(--br-6xs);
+  background-color: var(--color-gray-200);
+  border: 0.7px solid var(--color-darkslateblue);
+  box-sizing: border-box;
+  display: none;
+}
+.b2-authh {
+  position: relative;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-comfortaa);
+  color: var(--color-white);
+  text-align: left;
+  z-index: 1;
+}
+.rectangle-parent1-auth {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.rectangle-parent1-auth {
+  cursor: pointer;
+  border: 0.5px solid #9499C3;
+  padding: var(--padding-mini) var(--padding-4xl);
+  background-color: var(--color-gray-200);
+  border-radius: var(--br-6xs);
+  flex-direction: row;
+  white-space: nowrap;
+  z-index: 4;
+  margin-left: 130px;
+  width: 210px;
+}
+.rectangle-parent1-auth:hover {
+  background-color: #fff;
+  border: 0.7px solid var(--color-slategray);
+  box-sizing: border-box;
+}
+.b2-authh:hover {
+    color: var(--color-gray-200);
+}
+.container {
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  text-align: left;
+  font-size: var(--font-size-3xl);
+  color: var(--color-white);
+  font-family: var(--font-comfortaa);
+}
+@media screen and (max-width: 450px) {
+  .h31-auth {
+    font-size: var(--font-size-lg);
+  }
+}

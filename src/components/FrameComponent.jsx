@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import React, { useState } from 'react';
 import "./FrameComponent.css";
+import { Link } from "react-router-dom";
 
 const FrameComponent = () => {
   const onRectangleClick = useCallback(() => {
@@ -22,10 +23,11 @@ const FrameComponent = () => {
           <h1 className="h11">Швидка доставка в будь-яку точку країни</h1>
         </div>
         <div className="frame-group">
-          <button className="rectangle-parent">
+          <Link to="/registration" style={{ textDecoration: 'none', color: 'inherit' }}><button className="rectangle-parent">
             <div className="frame-child" />
             <b className="b1">Розпочати</b>
           </button>
+          </Link>
           <button className="rectangle-group">
             <div className="frame-item" onClick={onRectangleClick} />
             <b className="b2">Дізнатись більше</b>
