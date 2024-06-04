@@ -46,6 +46,6 @@ body {
   }
   
   .page-content {
-    flex-grow: 1; /* Allow page content to take the remaining space */
-    /* Add other styles for the page content if needed */
+    flex-grow: 1;
+    padding: 45px;
   }

@@ -55,6 +55,7 @@ const Authorization = () => {
         setSuccess('Login successful');
         setError('');
         localStorage.setItem('authToken', data.token);
+        window.location.href = '/general';
         // localStorage.setItem('userId', data.userId); 
       } else {
         const data = await response.json();

@@ -6,11 +6,16 @@ const Registration = () => {
   const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const [passwordType, setPasswordType] = useState('password');
   const [passwordType1, setPasswordType1] = useState('password');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('+380');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [formError, setFormError] = useState('');
+
+  const [confirmationCode, setConfirmationCode] = useState('');
+  const [isPhoneNumberConfirmationStep, setIsPhoneNumberConfirmationStep] = useState(false);
+  const [seconds, setSeconds] = useState(60);
+  const [error, setError] = useState('');
 
   const [isConfirmationStep1, setIsConfirmationStep1] = useState(true);
   const [isFathernameVisible, setIsFathernameVisible] = useState(true);
@@ -25,6 +30,10 @@ const Registration = () => {
 
   const closeConfirmationStep = useCallback(() => {
     setIsConfirmationStep(false);
+  }, []);
+
+  const closeConfirmationPhoneStep = useCallback(() => {
+    setIsPhoneNumberConfirmationStep(false);
   }, []);
 
   const closeConfirmationStep1 = useCallback(() => {
@@ -43,14 +52,54 @@ const Registration = () => {
     setPasswordType1((prevType) => (prevType === 'password' ? 'text' : 'password'));
   };
 
+  const generateSixDigitCode = () => {
+    const min = 100000;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };  
+
+  const sendSMS = async (phoneNumber, message) => {
+    const data = new FormData();
+    data.append('SendTo', phoneNumber);
+    data.append('Message', message);
+  
+    try {
+      const response = await fetch('http://localhost:4443/api/PhoneNumber', {
+        method: 'POST',
+        body: data,
+      });
+  
+      if (response.ok) {
+        console.log('SMS sent successfully');
+      } else {
+        console.error('Failed to send SMS');
+      }
+    } catch (error) {
+      console.error('Error sending SMS:', error);
+    }
+  };
+
   const onGroupContainer2Click = useCallback(() => {
     if (phoneNumber.trim() === '') {
-      setFormError('Будь ласка, введіть номер телефону');
+      setPasswordError('Будь ласка, введіть номер');
       return;
+    } else {
+      setFormError('');
+      const code = generateSixDigitCode(); // Генеруємо шестизначний код
+      console.log('Generated code:', code);
+      localStorage.setItem('codeHash', code.toString());
+
+      const savedCodeHash = localStorage.getItem('codeHash');
+      console.log('Saved code hash:', savedCodeHash);
+      const message = 'Ваш код для підтвердження: ' + savedCodeHash;
+
+      sendSMS(phoneNumber.replace('+', ''), message);
+
+      setIsConfirmationStep(true);
+      setIsPhoneNumberConfirmationStep(true);
     }
-    setFormError('');
-    setIsConfirmationStep(true);
   }, [phoneNumber]);
+  
 
   const NextPage = useCallback(() => {
     if (password.trim() === '' || confirmPassword.trim() === '') {
@@ -89,7 +138,15 @@ const Registration = () => {
   }, [password, confirmPassword]);
 
   const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+    // Перевіряємо, чи введений номер телефону починається з +380
+    const inputValue = e.target.value;
+    if (inputValue.startsWith('+380')) {
+      // Якщо так, просто оновлюємо стан з введеним значенням
+      setPhoneNumber(inputValue);
+    } else {
+      // Якщо ні, додаємо префікс країни до введеного значення та оновлюємо стан
+      setPhoneNumber('+380' + inputValue);
+    }
   };
 
   const handlePasswordChange = (e) => {
@@ -124,6 +181,10 @@ const Registration = () => {
     setEmail(e.target.value);
   };
 
+  const handleConfirmationCodeChange = (e) => {
+    setConfirmationCode(e.target.value);
+  };
+
   useEffect(() => {
     if (isConfirmationStep) {
       setGroupClass('group-reg3');
@@ -134,40 +195,67 @@ const Registration = () => {
 
   const handleSubmit = async () => {
     if (!isConfirmationStep2) {
-      const data = {
-        PhoneNumber: phoneNumber,
-        Login: login,
-        Password: password,
-        FirstName: name,
-        LastName: surname,
-        FatherName: fatherName,
-        Email: email,
-      };
+      const data = new FormData();
+      data.append('PhoneNumber', phoneNumber);
+      data.append('Login', login);
+      data.append('Password', password);
+      data.append('ConfirmPassword', confirmPassword); // Якщо у вас є підтвердження пароля
+      data.append('FirstName', name);
+      data.append('LastName', surname);
+      data.append('FatherName', fatherName);
+      data.append('Email', email);
   
-      console.log("Sending registration data:", data); // Виведення даних у консоль перед відправкою
+      console.log("Sending registration data:", Object.fromEntries(data.entries())); // Виведення даних у консоль перед відправкою
   
       try {
-        const response = await fetch('http://localhost:4443/galaxy-express/User/register', {
+        const response = await fetch('http://localhost:4443/galaxy-express/User/Register', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+          body: data,
         });
   
-        if (response.ok) {
+        const result = await response.json();
+  
+        if (response.ok && result.isSuccess) {
           alert('Реєстрація успішна');
         } else {
-          const errorMessage = await response.text();
-          setFormError(errorMessage || 'Помилка реєстрації');
+          const errorMessage = result.errors.length > 0 ? result.errors.join(', ') : 'Помилка реєстрації';
+          setFormError(errorMessage);
         }
       } catch (error) {
         console.error(error);
         setFormError('Помилка сервера');
       }
     }
+  };  
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => {
+        if (prevSeconds === 1) {
+          clearInterval(interval); // Зупиняємо інтервал при досягненні нуля
+          setIsConfirmationStep(false);
+        }
+        return prevSeconds - 1;
+      });
+    }, 1000);
+
+    // Прибираємо інтервал при виході з компонента
+    return () => clearInterval(interval);
+  }, []);
+
+  const verifyConfirmationCode = () => {
+    const savedCodeHash = localStorage.getItem('codeHash');
+
+    if (confirmationCode === savedCodeHash) {
+      console.log('Підтвердження пройшло')
+     
+      setIsPhoneNumberConfirmationStep(false);
+    } else {
+      // Показати помилку користувачу
+      setError('Помилка: код підтвердження не співпадає');
+    }
   };
-  
+
 
   return (
     <div className="registration">
@@ -223,9 +311,6 @@ const Registration = () => {
               <div className="rectangle-parent-reg">
                 <div className="frame-item-reg" />
                 <img className="image-36-icon-reg" alt="" src="/image-36@2x.png" />
-                <div className="country-code-wrapper-reg">
-                  <b className="country-code-reg">+380</b>
-                </div>
                 <input
                   className="ivanna-stashko-reg"
                   placeholder=""
@@ -259,13 +344,50 @@ const Registration = () => {
               </div>
             </div>
           </>
-        ) : (
+          ) : isPhoneNumberConfirmationStep ? (
+            <>
+            <b className="b-reg">Підтвердіть номер</b>
+            <div className="wrapper-reg">
+                <div className="div-reg">
+                  для номеру {phoneNumber}
+                </div>
+              </div>
+              <div className="frame-wrapper-reg">
+                <div className="rectangle-parent-reg">
+                  <div className="frame-item-reg" />
+                 
+                  <input
+                    className="confirmationCode-reg"
+                    placeholder=""
+                    type="text"
+                    value={confirmationCode}
+                    onChange={handleConfirmationCodeChange}
+                  />
+                  <div className="input-box-parent-reg">
+                    <div className="input-bo-reg" />
+                    <div className="rectangle-group-reg" onClick={closeConfirmationStep}>
+                      <div className="frame-inner-reg" />
+                      <img className="input-icon-reg" alt="" src="/input-icon.png" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>Залишилось {seconds} секунд</div>
+              <div className="frame-container-reg" onClick={verifyConfirmationCode }>
+                <div className="rectangle-container-reg" >
+                  <div className="rectangle-div-reg" />
+                  <b className="b1-reg">Підтвердити</b>
+                </div>
+              </div>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
+            </>
+         ) :
           isConfirmationStep1 ? (
             <>
               <b className="b-reg">Створіть пароль</b>
               <div className="wrapper-reg">
                 <div className="div-reg">
-                  для номеру +380 {phoneNumber}
+                  для номеру {phoneNumber}
                 </div>
               </div>
               <div className="frame-wrapper-reg">
@@ -284,13 +406,6 @@ const Registration = () => {
                   <img className="image-36-icon-reg" alt="" src="/image-22@2x2.png"
                     onClick={togglePasswordVisibility}
                     style={{ cursor: 'pointer' }} />
-                  <div className="input-box-parent-reg">
-                    <div className="input-bo-reg" />
-                    <div className="rectangle-group-reg" onClick={closeConfirmationStep}>
-                      <div className="frame-inner-reg" />
-                      <img className="input-icon-reg" alt="" src="/input-icon.png" />
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="frame-wrapper-reg">
@@ -320,7 +435,7 @@ const Registration = () => {
                 </div>
               </div>
             </>
-          ) : (
+          ) :
             isConfirmationStep2 ? (
               <>
                 <b className="b-reg">Особисті дані</b>
@@ -449,8 +564,9 @@ const Registration = () => {
                 </div>
               </>
             )
-          )
-        )}
+          
+        
+        }
       </div>
     </div>
   );

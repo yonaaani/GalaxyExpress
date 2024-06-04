@@ -2,47 +2,56 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { Avatar, Vector, Gear, Bell, Message } from "../images/index";
 import { Link } from "react-router-dom";
+import { useJwt } from 'react-jwt';
 
 const Header = ({ token }) => {
     const [user, setUser] = useState(null); // State to store user data
     const [isAvatarPopUp, setIsAvatarPopUp] = useState(false);
     const [isBellPopUp, setIsBellPopUp] = useState(false);
+    const { decodedToken, isExpired } = useJwt(token);
 
-    // Fetch user data when component mounts
     useEffect(() => {
-        const fetchUser = async () => {
+        console.log('Decoded token:', decodedToken);
+    }, [decodedToken]);
+
+    useEffect(() => {
+        if (decodedToken && decodedToken.sub) {
+          const userId = decodedToken.sub;
+          const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:4443/galaxy-express/User/secure-data', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': '*/*',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-    
-                if (response.ok) {
-                    const userData = await response.json();
-                    console.log('Fetched user data:', userData); // Log user data to console
-                    setUser(userData);
-                } else {
-                    console.error('Error fetching user data:', response.statusText);
-                    const errorData = await response.json();
-                    console.error('Error details:', errorData);
+              const response = await fetch(`http://localhost:4443/galaxy-express/User/${userId}`, {
+                method: 'GET',
+                headers: {
+                  'Accept': '*/*',
+                  'Authorization': `Bearer ${token}`
                 }
+              });
+      
+              if (response.ok) {
+                const userData = await response.json();
+                console.log('Fetched user data:', userData); // Log user data to console
+                setUser(userData);
+              } else {
+                console.error('Error fetching user data:', response.statusText);
+                const errorData = await response.json();
+                console.error('Error details:', errorData);
+              }
             } catch (error) {
-                console.error('Error fetching user data:', error);
+              console.error('Error fetching user data:', error);
             }
-        };
+          };
+      
+          fetchData();
+        }
+      }, [decodedToken, token]);
     
-        fetchUser(); // Call the fetchUser function
-    }, [token]); // Fetch user data when token prop changes
     
 
     return (
         <div className='header'>
             <div className="header__left">
                 {/* Display user's first name, last name, and father's name if user data is available */}
-                {user && (
+                {user && user.FirstName && user.LastName && user.FatherName && (
                     <p className='header__left__nickname'>
                         {user.FirstName} {user.LastName} {user.FatherName}
                     </p>
@@ -55,8 +64,10 @@ const Header = ({ token }) => {
                         <img className='avatar__popup__picture' src={Vector} alt="" />
                     </div>
                     {isAvatarPopUp && (
+                        <>
+                        <img src='box-inbox.png' className='box-inbox-image'></img>
                         <div className="profile">
-                            <p className='profile__text'>Керувати профілем</p>
+                            <Link to="/editAccount" style={{ textDecoration: 'none', color: 'inherit' }}><p className='profile__text'>Керувати профілем</p></Link>
                             <hr className='profile__hr'/>
 
                             <p className='profile__text'>Мoї адреси</p>
@@ -65,6 +76,7 @@ const Header = ({ token }) => {
 
                             <p className='profile__text'>Вийти</p>
                         </div>
+                        </>
                     )}
                 </div>
             </div>
@@ -76,6 +88,8 @@ const Header = ({ token }) => {
                     <img className="bell__popup__picture" src={Bell} alt="" />
 
                     {isBellPopUp && (
+                        <>
+                        <img src='box-inbox.png' className='box-inbox-image-notification'></img>
                         <div className='notification'>
                             <div className='notification__header'>
                                 <p>Ваші сповіщення</p>
@@ -85,6 +99,7 @@ const Header = ({ token }) => {
                             <p className='notification__date'>14.10</p>
                             <NotificationMessage text="Посилку було отримано, дякуємо за довіру!" time="12:04"/>
                         </div>
+                        </>
                     )}
                 </div>
                 <img className='header__right__gear' src={Gear} alt="" />

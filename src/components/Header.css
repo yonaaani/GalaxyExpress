@@ -87,7 +87,7 @@
     z-index: 10;
     top: 50px;
     right: -20px;
-    padding: 0px 15px 10px;
+    padding: 0px 15px 15px;
     min-width: 235px;
 
     display: flex;
@@ -127,4 +127,16 @@
     bottom: 0;
     right: 7px;
     font-size: 7px;
+}
+.box-inbox-image {
+    width: 30px;
+    margin-top: 50px;
+    position: absolute;
+    margin-left: 45px;
+}
+.box-inbox-image-notification {
+    width: 30px;
+    position: absolute;
+    margin-top: 25px;
+    margin-left: -28px;
 }
