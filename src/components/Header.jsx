@@ -4,22 +4,30 @@ import { Avatar, Vector, Gear, Bell, Message } from "../images/index";
 import { Link } from "react-router-dom";
 import { useJwt } from 'react-jwt';
 
-const Header = ({ token }) => {
-    const [user, setUser] = useState(null); // State to store user data
+const Header = () => {
     const [isAvatarPopUp, setIsAvatarPopUp] = useState(false);
     const [isBellPopUp, setIsBellPopUp] = useState(false);
+
+    // Get token from localStorage
+    const token = localStorage.getItem('authToken');
     const { decodedToken, isExpired } = useJwt(token);
 
     useEffect(() => {
         console.log('Decoded token:', decodedToken);
     }, [decodedToken]);
 
+    const user = decodedToken ? {
+        FirstName: decodedToken.FirstName,
+        LastName: decodedToken.LastName,
+        FatherName: decodedToken.FatherName,
+    } : null;
+
     useEffect(() => {
         if (decodedToken && decodedToken.sub) {
           const userId = decodedToken.sub;
           const fetchData = async () => {
             try {
-              const response = await fetch(`http://localhost:4443/galaxy-express/User/${userId}`, {
+              const response = await fetch(`http://localhost:4443/api/User/${userId}`, {
                 method: 'GET',
                 headers: {
                   'Accept': '*/*',
@@ -45,15 +53,13 @@ const Header = ({ token }) => {
         }
       }, [decodedToken, token]);
     
-    
-
     return (
         <div className='header'>
             <div className="header__left">
                 {/* Display user's first name, last name, and father's name if user data is available */}
                 {user && user.FirstName && user.LastName && user.FatherName && (
                     <p className='header__left__nickname'>
-                        {user.FirstName} {user.LastName} {user.FatherName}
+                       {user.LastName} {user.FirstName} {user.FatherName}
                     </p>
                 )}
                 <div className="avatar"

@@ -30,33 +30,28 @@ const Authorization = () => {
   };
 
   const handleLogin = async () => {
-    const payload = {
-      Login: login,
-      Password: password,
-    };
-  
-    console.log("Sending login request with payload:", payload);
-  
+    const formData = new FormData();
+    formData.append('Login', login);
+    formData.append('Password', password);
+
+    console.log("Sending login request with payload:", formData);
+
     try {
-      const response = await fetch('http://localhost:4443/galaxy-express/User/token', {
+      const response = await fetch('http://localhost:4443/api/User/Login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
-  
+
       console.log("Response status:", response.status);
-  
+
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful. Received token:", data.token);
-        setToken(data.token);
+        console.log("Login successful. Received token:", data.accessToken);
+        setToken(data.accessToken);
         setSuccess('Login successful');
         setError('');
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authToken', data.accessToken);
         window.location.href = '/general';
-        // localStorage.setItem('userId', data.userId); 
       } else {
         const data = await response.json();
         console.error("Login failed. Error message:", data.message || 'Failed to login');

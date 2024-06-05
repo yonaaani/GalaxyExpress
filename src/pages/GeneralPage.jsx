@@ -8,15 +8,15 @@ import Tracking from "./Tracking";
 // import Shop from "./Shop";
 // import Statistics from "./Statistics";
 
-const GeneralPage = ({ token }) => {
+const GeneralPage = ({ }) => {
   const [activeComponent, setActiveComponent] = useState('home');
 
   const renderComponent = () => {
     switch (activeComponent) {
       case 'home':
-        return <Home token={token} />;
+        return <Home />;
       case 'tracking':
-        return <Tracking token={token} />;
+        return <Tracking />;
       // case 'services':
       //   return <Services token={token} />;
       // case 'shop':
@@ -24,7 +24,7 @@ const GeneralPage = ({ token }) => {
       // case 'statistics':
       //   return <Statistics token={token} />;
       default:
-        return <Home token={token} />;
+        return <Home />;
     }
   };
 
@@ -32,7 +32,7 @@ const GeneralPage = ({ token }) => {
     <div className='container-general'>
       <Sidebar setActiveComponent={setActiveComponent} />
       <div className="main-content-general">
-        <Header className="header-general" token={token} />
+        <Header className="header-general" />
         <div className="page-content">
           {renderComponent()}
         </div>

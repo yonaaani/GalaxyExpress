@@ -1,0 +1,20 @@
+.group-reg-confirm-email,
+  .registration {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .group-reg-confirm-email {
+    width: 635px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 326px 106px 368px 129px;
+    gap: 13px;
+    min-width: 635px;
+    max-width: 100%;
+    font-size: var(--font-size-smi);
+    color: var(--color-lightslategray);
+    z-index: 3;
+    background-color: #15183d;
+    border: 1px solid #44456a;
+  }

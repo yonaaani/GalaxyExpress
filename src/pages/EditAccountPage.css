@@ -44,10 +44,11 @@
   .edit-page-information {
     flex: 1;
     background-color: #13152E;
-    margin: 65px;
+    margin: 45px;
     display: flex;
     flex-direction: row;
-    gap: 70px;
+    gap: 50px;
+    margin-top: 30px;
   }
   .edit-profile-text {
     display: flex;
@@ -126,20 +127,26 @@
     margin-left: 20px;
     border-radius: 15px;
     border: 2px solid #55567E;
+    padding: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
   }
   .edit-page-information-column2 {
     width: 49%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
   }
   .edit-page-contact-data {
     width: 100%;
-    height: 55%;
+    height: 65%;
     background-color: #15183D;
     border-radius: 15px;
     border: 2px solid #55567E;
+    padding: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
   }
   .edit-page-password-data {
     width: 100%;
@@ -147,4 +154,202 @@
     background-color: #15183D;
     border-radius: 15px;
     border: 2px solid #55567E;
+    padding: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
   }
+  .edit-page-information-h4 {
+    margin: 0;
+  }
+  .edit-page-information-p {
+    font-size: 11px;
+    color: #9499C3;
+  }
+
+  .group-editAccount {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .group-editAccount {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 7px;
+    font-size: var(--font-size-smi);
+    color: var(--color-lightslategray);
+    z-index: 3;
+    margin-top: 20px;
+  }
+
+  .birthday-edit {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 110px;
+    width: 162px;
+    z-index: 7;
+    color: #13152E;
+  }
+  .sex-edit {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 2px;
+    margin-left: 15px;
+    width: 162px;
+    z-index: 7;
+    color: #13152E;
+  }
+  .calendar-image {
+    width: 20px;
+    height: 20px;
+  }
+
+  .rectangle-parent-birthday {
+    flex: 1;
+    border-radius: var(--br-6xs);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gainsboro-200);
+    padding: 9px 18px;
+    position: relative;
+    gap: 20px;
+    z-index: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
+    z-index: 10;
+  }
+
+  .react-datepicker {
+    z-index: 10 !important;
+}
+
+
+  .react-datepicker__current-month {
+    color: #fff; /* Колір тексту заголовка */
+}
+
+/* Змінюємо колір кнопок переходу на місяць */
+.react-datepicker__navigation {
+    background-color: #15183D; /* Колір кнопок */
+    border: none; /* Видаляємо рамку */
+}
+
+/* Змінюємо колір днів тижня */
+.react-datepicker__day-name {
+    color: #15183D; /* Колір тексту днів тижня */
+}
+
+/* Змінюємо колір фону для вибраного дня */
+.react-datepicker__day--selected {
+    background-color: #D5A426; /* Колір фону для вибраного дня */
+    color: #fff; /* Колір тексту для вибраного дня */
+}
+
+/* Змінюємо колір тексту для незахоплених днів поза поточним місяцем */
+.react-datepicker__day--outside-month {
+    color: #9499C3; /* Колір тексту */
+}
+.photo-download {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.photo-download-text {
+  color: white;
+}
+
+.download-image {
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+}
+
+.buttons-editAccount {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.buttons-editAccount-contact-data {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.group-button-editAccount {
+  cursor: pointer;
+  border: 0;
+  padding: 10px var(--padding-xl);
+  background-color: #D5A426;
+  width: 144px;
+  border-radius: var(--br-6xs);
+  box-sizing: border-box;
+  z-index: 5;
+  color: white ;
+}
+.group-button-editAccount2 {
+  cursor: pointer;
+  border: 0;
+  padding: 10px var(--padding-xl);
+  background-color: white;
+  width: 144px;
+  border-radius: var(--br-6xs);
+  box-sizing: border-box;
+  z-index: 5;
+}
+.b1-editAccount {
+  flex: 1;
+  position: relative;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-comfortaa);
+  color: white;
+  text-align: center;
+  z-index: 1;
+}
+
+.frame-wrapper1-edit {
+  align-self: stretch;
+}
+
+.frame-wrapper1-edit {
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: center;
+}
+
+.add-new-number {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.add-new-number-text {
+  color: white;
+  margin: 5px;
+}
+.add-button-image {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}

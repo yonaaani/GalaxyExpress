@@ -8,12 +8,12 @@ const CountOFPeople = () => {
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const response = await fetch("http://localhost:4443/galaxy-express/User/count-with-delete");
-        
+        const response = await fetch("http://localhost:4443/api/User/GetCountOfUsers");
+
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
         }
-    
+
         const userCount = await response.text();
         setUserCount(userCount); // Зберігаємо кількість користувачів у стані компонента
       } catch (error) {

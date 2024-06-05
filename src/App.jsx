@@ -7,7 +7,7 @@ import PasswordRecoveryPage from "./pages/PasswordRecoveryPage";
 import LoginRecoveryPage from "./pages/LoginRecoveryPage";
 import EditAccountPage from "./pages/EditAccountPage";
 import GeneralPage from "./pages/GeneralPage";
-import Home from "./pages/Home";
+import ConfirmEmailPage from "./pages/ConfirmEmailPage";
 
 function App() {
   const action = useNavigationType();
@@ -81,7 +81,8 @@ function App() {
       {token ? (
         <>
           <Route path="/editAccount" element={<EditAccountPage />} /> 
-          <Route path="/general" element={<GeneralPage token={token} />} />
+          <Route path="/general" element={<GeneralPage />} />
+          <Route path="/confirm-email/:token" element={<ConfirmEmailPage />} />
         </>
       ) : (
         <Navigate to="/authorization" />

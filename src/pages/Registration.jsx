@@ -20,6 +20,8 @@ const Registration = () => {
   const [isConfirmationStep1, setIsConfirmationStep1] = useState(true);
   const [isFathernameVisible, setIsFathernameVisible] = useState(true);
   const [login, setLogin] = useState('');
+  const [loginError, setLoginError] = useState('');  
+  const [isLoginUnique, setIsLoginUnique] = useState(true);
   const [surname, setSurname] = useState('');
   const [name, setName] = useState('');
   const [fatherName, setFatherName] = useState('');
@@ -27,6 +29,7 @@ const Registration = () => {
 
   const [isConfirmationStep2, setIsConfirmationStep2] = useState(true);
   const [email, setEmail] = useState('');
+  const [isEmailStep, setIsEmailStep] = useState(true);
 
   const closeConfirmationStep = useCallback(() => {
     setIsConfirmationStep(false);
@@ -114,7 +117,29 @@ const Registration = () => {
     setIsConfirmationStep1(false);
   }, [password, confirmPassword]);
 
-  const NextPage1 = useCallback(() => {
+  const checkLoginUniqueness = async (login) => {
+    try {
+      const response = await fetch(`http://localhost:4443/api/User/CheckLoginExistence/${login}`, {
+        headers: {
+          'accept': 'text/plain'
+        }
+      });
+      const result = await response.json();
+      console.log(result.message); // Log the message for debugging
+      // Check the message to determine if the login is available
+      if (result.message.includes('можна використовувати')) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Error checking login uniqueness:', error);
+      return false;
+    }
+  };
+  
+
+  const NextPage1 = useCallback(async () => {
     if (
       login.trim() === '' ||
       surname.trim() === '' ||
@@ -124,6 +149,13 @@ const Registration = () => {
       setFormError('Будь ласка, заповніть всі необхідні поля');
       return;
     }
+
+    const isLoginUnique = await checkLoginUniqueness(login);
+    if (!isLoginUnique) {
+      setFormError('Логін вже зайнятий');
+      return;
+    }
+
     setFormError('');
     setIsConfirmationStep2(false);
   }, [login, surname, name, fatherName, isFathernameVisible]);
@@ -193,55 +225,63 @@ const Registration = () => {
     }
   }, [isConfirmationStep]);
 
+
   const handleSubmit = async () => {
-    if (!isConfirmationStep2) {
-      const data = new FormData();
-      data.append('PhoneNumber', phoneNumber);
-      data.append('Login', login);
-      data.append('Password', password);
-      data.append('ConfirmPassword', confirmPassword); // Якщо у вас є підтвердження пароля
-      data.append('FirstName', name);
-      data.append('LastName', surname);
-      data.append('FatherName', fatherName);
-      data.append('Email', email);
+    const data = new FormData();
+    data.append('PhoneNumber', phoneNumber);
+    data.append('Login', login);
+    data.append('Password', password);
+    data.append('ConfirmPassword', confirmPassword);
+    data.append('FirstName', name);
+    data.append('LastName', surname);
+    data.append('FatherName', fatherName);
+    data.append('Email', email);
   
-      console.log("Sending registration data:", Object.fromEntries(data.entries())); // Виведення даних у консоль перед відправкою
+    console.log("Sending registration data:", Object.fromEntries(data.entries()));
   
-      try {
-        const response = await fetch('http://localhost:4443/galaxy-express/User/Register', {
-          method: 'POST',
-          body: data,
-        });
+    try {
+      const response = await fetch('http://localhost:4443/api/User', {
+        method: 'POST',
+        body: data,
+      });
   
-        const result = await response.json();
+      const result = await response.json();
   
-        if (response.ok && result.isSuccess) {
-          alert('Реєстрація успішна');
+      if (response.ok) {
+        if (result.isSuccess) {
+          alert('Реєстрація успішна. Перевірте свою пошту для підтвердження реєстрації.');
         } else {
-          const errorMessage = result.errors.length > 0 ? result.errors.join(', ') : 'Помилка реєстрації';
+          const errorMessage = result.message || 'Помилка реєстрації';
           setFormError(errorMessage);
         }
-      } catch (error) {
-        console.error(error);
-        setFormError('Помилка сервера');
+      } else {
+        const errorMessage = result.message || 'Помилка сервера';
+        setFormError(errorMessage);
       }
+    } catch (error) {
+      console.error(error);
+      setFormError('Помилка сервера');
     }
-  };  
+  };
+  
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(prevSeconds => {
-        if (prevSeconds === 1) {
-          clearInterval(interval); // Зупиняємо інтервал при досягненні нуля
-          setIsConfirmationStep(false);
-        }
-        return prevSeconds - 1;
-      });
-    }, 1000);
+    if (seconds > 0) {
+      const interval = setInterval(() => {
+        setSeconds(prevSeconds => {
+          if (prevSeconds === 1) {
+            clearInterval(interval); 
+            if (isPhoneNumberConfirmationStep === true) {
+              setIsConfirmationStep(false);
+            }
+          }
+          return prevSeconds - 1;
+        });
+      }, 1000);
 
-    // Прибираємо інтервал при виході з компонента
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval); 
+    }
+  }, [seconds, isPhoneNumberConfirmationStep]);
 
   const verifyConfirmationCode = () => {
     const savedCodeHash = localStorage.getItem('codeHash');
@@ -526,7 +566,7 @@ const Registration = () => {
                   </div>
                 </div>
               </>
-            ) : (
+            ) : isEmailStep ? (
               <>
                 <b className="b-reg">Захистити свій профіль</b>
                 <div className="wrapper-reg">
@@ -563,8 +603,20 @@ const Registration = () => {
                   </div>
                 </div>
               </>
-            )
-          
+             ) : (
+              <div>
+                <div className="group-reg">
+                  <div className="group-reg2">
+                    <img className="line-icon1" alt="" src="/line1.svg" />
+                    <b className="b">Підтвердження</b>
+                  </div>
+                  <button onClick={handleSubmit} className="submit-button">
+                    Завершити реєстрацію
+                  </button>
+                  {formError && <div className="error-message">{formError}</div>}
+                </div>
+            </div>
+             )
         
         }
       </div>
