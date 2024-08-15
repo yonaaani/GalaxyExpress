@@ -55,6 +55,39 @@ const Registration = () => {
     setPasswordType1((prevType) => (prevType === 'password' ? 'text' : 'password'));
   };
 
+  const isValidPassword = (password) => {
+    // Мінімальна та максимальна довжина пароля
+    const minLength = 8;
+    const maxLength = 20;
+  
+    // Перевірка мінімальної та максимальної довжини
+    if (password.length < minLength || password.length > maxLength) {
+      return false;
+    }
+  
+    // Перевірка наявності цифр
+    if (!/\d/.test(password)) {
+      return false;
+    }
+  
+    // Перевірка наявності букв верхнього регістру
+    if (!/[A-Z]/.test(password)) {
+      return false;
+    }
+  
+    // Перевірка наявності букв нижнього регістру
+    if (!/[a-z]/.test(password)) {
+      return false;
+    }
+  
+    // Перевірка наявності спеціальних символів
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      return false;
+    }
+  
+    return true;
+  };
+
   const generateSixDigitCode = () => {
     const min = 100000;
     const max = 999999;
@@ -161,6 +194,12 @@ const Registration = () => {
   }, [login, surname, name, fatherName, isFathernameVisible]);
 
   const onGroupContainer2Click1 = useCallback(() => {
+    if (!isValidPassword(password)) {
+      setError('Пароль повинен містити принаймні 8 символів, включаючи цифри, букви верхнього та нижнього регістру, і спеціальні символи.');
+      setSuccess('');
+      return;
+    }
+    
     if (password === confirmPassword) {
       setIsConfirmationStep(true);
       setPasswordError('');

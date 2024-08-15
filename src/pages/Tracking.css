@@ -48,3 +48,79 @@
     flex-direction: row;
     display: flex;
 }
+
+.rectangle-parent2-tracking {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  padding: var(--padding-mid) var(--padding-lgi) var(--padding-mid)
+    var(--padding-3xl);
+  gap: var(--gap-2xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-300);
+  z-index: 6;
+  margin-left: 670px;
+  margin-top: 27px;
+  height: 60px;
+  border: 1px solid #55567E ;
+}
+
+.rectangle-parent2-tracking2 {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  padding: var(--padding-mid) var(--padding-lgi) var(--padding-mid)
+    var(--padding-3xl);
+  gap: var(--gap-2xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-300);
+  z-index: 6;
+  margin-left: 900px;
+  margin-top: 27px;
+  height: 60px;
+  border: 1px solid #55567E ;
+}
+
+.div11-calendar {
+  position: relative;
+  z-index: 1;
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+}
+.b9-calendar {
+  margin-left: 5px;
+}
+.b9-calendar-text {
+  margin-top: 5px;
+}
+.dropdown-list-tracking {
+  position: absolute;
+  left: -132px;
+  width: 146px;
+  background-color: #fff;
+  border: 2px solid #9499C3;
+  border-top: none;
+  z-index: 3;
+  max-height: 150px; 
+  overflow-y: auto;
+  border-radius: 0px 0px 10px 10px;
+  margin-top: 5px;
+}
+.box-settings {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-left: 55px;
+  margin-top: 95px;
+  font-size: 13px;
+  color: #9499C3;
+}

@@ -20,6 +20,7 @@ const Header = () => {
         FirstName: decodedToken.FirstName,
         LastName: decodedToken.LastName,
         FatherName: decodedToken.FatherName,
+        BonusAccount: decodedToken.BonusAccount,
     } : null;
 
     useEffect(() => {
@@ -87,7 +88,9 @@ const Header = () => {
                 </div>
             </div>
             <div className="header__right">
-                <p className='header__right__balance'>560$</p>
+                {user && user.BonusAccount && (
+                    <p className='header__right__balance'>{user.BonusAccount}$</p>
+                )}
                 <div className="bell__popup"
                     onMouseEnter={() => setIsBellPopUp(true)}
                     onMouseLeave={() => setIsBellPopUp(false)}>

@@ -123,6 +123,7 @@
   font-size: var(--font-size-smi);
   color: var(--color-white);
   font-family: var(--font-comfortaa);
+  overflow: auto;
 }
 @media screen and (max-width: 1050px) {
   .h1 {
@@ -147,6 +148,7 @@
 
 body {
   user-select: none;
+  overflow: auto;
 }
 
 input[type="checkbox"] {

@@ -53,7 +53,7 @@ export const getParcelMachines = async () => {
   }
 };
 
-const Home = ({ token }) => {
+const Home = () => {
   const [showPostamats, setShowPostamats] = useState(false);
   const [showDepartments, setShowDepartments] = useState(true);
 

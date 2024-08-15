@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import FrameComponent1 from "../components/FrameComponent1";
 import "./Authorization.css";
+import { Link } from "react-router-dom";
 
 const Authorization = () => {
   const [passwordType, setPasswordType] = useState('password');
@@ -11,18 +12,14 @@ const Authorization = () => {
   const [success, setSuccess] = useState('');
   const [isPasswordRecovery, setIsPasswordRecovery] = useState(false);
   const [email, setEmail] = useState('');
+  const [accountId, setAccountId] = useState('');
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
-  const [confirmationCode, setConfirmationCode] = useState('');
-  const [isLoginRecovery, setIsLoginRecovery] = useState(false); // Added
+  const [isLoginRecovery, setIsLoginRecovery] = useState(false);
+  const [isadditionalContent, setAdditionalContent] = useState(false);
+  const [isadditionalContent2, setAdditionalContent2] = useState(false);
 
   const handlePasswordRecoveryClick = useCallback(() => {
     setIsPasswordRecovery(true);
-  }, []);
-
-  const handleBackToLoginClick = useCallback(() => {
-    setIsPasswordRecovery(false);
-    setIsEmailConfirmed(false);
-    setIsLoginRecovery(false); // Added
   }, []);
 
   const togglePasswordVisibility = () => {
@@ -34,99 +31,122 @@ const Authorization = () => {
     formData.append('Login', login);
     formData.append('Password', password);
 
-    console.log("Sending login request with payload:", formData);
-
     try {
       const response = await fetch('http://localhost:4443/api/User/Login', {
         method: 'POST',
         body: formData,
       });
 
-      console.log("Response status:", response.status);
-
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful. Received token:", data.accessToken);
         setToken(data.accessToken);
-        setSuccess('Login successful');
+        setSuccess('Успішний вхід');
         setError('');
         localStorage.setItem('authToken', data.accessToken);
         window.location.href = '/general';
       } else {
         const data = await response.json();
-        console.error("Login failed. Error message:", data.message || 'Failed to login');
-        setError(data.message || 'Failed to login');
+        setError(data.message || 'Не вдалося увійти');
         setSuccess('');
       }
     } catch (error) {
-      console.error('An error occurred. Please try again later.', error);
-      setError('An error occurred. Please try again later.');
+      setError('Сталася помилка. Спробуйте пізніше.');
       setSuccess('');
     }
   };
-  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleEmailConfirm = async () => {
-    if (email) {
+  const handleAccountIdChange = (e) => {
+    setAccountId(e.target.value);
+  };
+
+  const handleContinueClick = () => {
+    setAdditionalContent(true);
+  };
+
+  const handleContinueClick2 = () => {
+    setAdditionalContent2(true);
+  };
+
+
+  const handlePasswordRecoverySubmit = async () => {
+    if (email && accountId) {
       try {
-        // Здійснюємо запит на сервер для отримання списку всіх емейлів
-        const response = await fetch('http://localhost:4443/galaxy-express/Email', {
-          method: 'GET',
+        const formData = new FormData();
+        formData.append('UserId', accountId);
+        formData.append('Email', email);
+  
+        const response = await fetch('http://localhost:4443/api/User/ForgotPassword', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          if (data.isSuccess) {
+            setSuccess(data.message || 'Інструкції для відновлення пароля надіслано на ваш email.');
+            setError('');
+            setIsLoginRecovery(false);
+            setIsPasswordRecovery(false);
+            handleContinueClick2();
+          } else {
+            setError(data.message || 'Не вдалося відновити пароль.');
+            setSuccess('');
+          }
+        } else {
+          setError('Не вдалося відновити пароль. Спробуйте пізніше.');
+          setSuccess('');
+        }
+      } catch (error) {
+        setError('Сталася помилка. Спробуйте пізніше.');
+        setSuccess('');
+      }
+    } else {
+      setError('Будь ласка, введіть ваш email та account ID.');
+    }
+  };
+
+  const handleLoginRecoverySubmit = async () => {
+    if (accountId) {
+      try {
+        const response = await fetch(`http://localhost:4443/api/User/ForgotLogin/${accountId}`, {
+          method: 'POST',
           headers: {
+            'accept': 'application/json',
             'Content-Type': 'application/json',
           },
         });
   
         if (response.ok) {
           const data = await response.json();
-          // Перевіряємо, чи введений email знаходиться в списку
-          const emailExists = data.some(item => item.emailAddress === email);
-          
-          if (emailExists) {
-            // Якщо email існує в базі, тоді встановлюємо прапорець isEmailConfirmed на true
-            setIsEmailConfirmed(true);
-            setIsLoginRecovery(true); // Встановлюємо isLoginRecovery на true, якщо це потрібно
+          if (data.isSuccess) {
+            setSuccess(data.message || 'Login recovery instructions have been sent to your email.');
+            setError('');
+            setIsLoginRecovery(false);
+            setIsPasswordRecovery(false);
+            handleContinueClick();
           } else {
-            setError('Введений email не існує в базі.');
+            setError(data.message || 'Failed to recover login.');
+            setSuccess('');
           }
         } else {
-          setError('Помилка під час отримання списку емейлів.');
+          setError('Failed to recover login. Please try again later.');
+          setSuccess('');
         }
       } catch (error) {
-        console.error('An error occurred while fetching email list:', error);
-        setError('Помилка під час з\'єднання з сервером.');
+        console.error('An error occurred while recovering login:', error);
+        setError('An error occurred. Please try again later.');
+        setSuccess('');
       }
     } else {
-      setError('Будь ласка, введіть ваш email.');
+      setError('Please enter your account ID.');
     }
   };
 
-  const handleConfirmationCodeChange = (e) => {
-    setConfirmationCode(e.target.value);
-  };
-
-  const handlePasswordRecoverySubmit = () => {
-    if (confirmationCode) {
-      // Handle password recovery process with the confirmation code
-      // For example, send the confirmation code to the server to verify and allow password reset
-    } else {
-      setError('Please enter the confirmation code.');
-    }
-  };
-
-  const handleLoginConfirm = () => {
-    if (email) {
-      setIsEmailConfirmed(true); // Правильне використання функції setIsEmailConfirmed
-      setIsLoginRecovery(true); // Встановлюємо isLoginRecovery на true
-    } else {
-      setError('Please enter your email address.');
-    }
-  };
-
+  
   return (
     <div className="authorization">
       <main className="star-animate-parent">
@@ -162,52 +182,81 @@ const Authorization = () => {
               <div className="parent">
                 <h3 className="h3">{isPasswordRecovery ? 'Відновлення паролю' : 'Відновлення логіна'}</h3>
                 <div className="divv">
-                  {isEmailConfirmed ? 'На вказаний email було відправлено лист з інструкцією по відновленню вашого ' + (isPasswordRecovery ? 'пароля' : 'логіна') : `Введіть ваш ${isPasswordRecovery ? 'Email' : 'Email'} для відновлення`}
+                  {isEmailConfirmed ? 'На вказаний email було відправлено лист з інструкцією по відновленню вашого ' + (isPasswordRecovery ? 'пароля' : 'логіна') : `Введіть ваш ${isPasswordRecovery ? 'Email та AccountId' : 'AccountId'} для відновлення`}
                 </div>
               </div>
             </div>
             {!isEmailConfirmed ? (
               <>
+                {isPasswordRecovery && (
+                  <div className="frame-wrapper-reg">
+                    <div className="rectangle-parent-reg2">
+                      <div className="frame-item-reg" />
+                      <div className="country-code-wrapper-reg">
+                        <b className="country-code-reg">Email</b>
+                      </div>
+                      <input
+                        className="email-reg"
+                        placeholder=""
+                        value={email}
+                        onChange={handleEmailChange}
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="frame-wrapper-reg">
-  <div className="rectangle-parent-reg2">
-    <div className="frame-item-reg" />
-    <div className="country-code-wrapper-reg">
-      <b className="country-code-reg">Email</b>
-    </div>
-    <input
-      className="email-reg"
-      placeholder=""
-      value={email}
-      onChange={handleEmailChange}
-    />
-    <div className="input-box-parent-reg">
-      <div className="input-bo-reg" />
-      <div className="rectangle-group-reg" onClick={handleBackToLoginClick}>
-        <div className="frame-inner-reg" />
-        <img className="input-icon-reg" alt="" src="/input-icon.png" />
-      </div>
-    </div>
-  </div>
-</div>
-{error && <div className="error-message">{error}</div>}
-<div className="frame-wrapper1">
-  <button className="group-button-auth" onClick={isPasswordRecovery ? handleEmailConfirm : handleLoginConfirm}>
-    <div className="frame-child1" />
-    <b className="b1">Продовжити</b>
-  </button>
-</div>
+                  <div className="rectangle-parent-reg2">
+                    <div className="frame-item-reg" />
+                    <div className="country-code-wrapper-reg">
+                      <b className="country-code-reg">AccountId</b>
+                    </div>
+                    <input
+                      className="accountId-reg"
+                      placeholder=""
+                      value={accountId}
+                      onChange={handleAccountIdChange}
+                    />
+                  </div>
+                </div>
+                {error && <div className="error-message">{error}</div>}
+                <div className="frame-wrapper1">
+                  <button className="group-button-auth" onClick={isPasswordRecovery ? handlePasswordRecoverySubmit : handleLoginRecoverySubmit}>
+                    <div className="frame-child1" />
+                    <b className="b1">Продовжити</b>
+                  </button>
+                </div>
               </>
-            ) : (
+            ) : isadditionalContent  ? (
               <>
-    <div className="frame-wrapper11">
-      <div className="divv">
-        Якщо Ви не бачите лист в поштовій скриньці, спробуйте перевірити спам-папку. Або скористайтесь формою відновлення {isPasswordRecovery ? 'пароля' : 'логіна'} ще раз.
-      </div>
-    </div>
-  </>
-            )}
+                <div className="frame-wrapper11">
+                  <div className="divv">
+                    Якщо Ви не бачите лист в поштовій скриньці, спробуйте перевірити спам-папку. Або скористайтесь формою відновлення {isPasswordRecovery ? 'пароля' : 'логіна'} ще раз.
+                  </div>
+                </div>
+              </>
+           ) : null }
           </>
-        ) : (
+        )  : isadditionalContent  ? (
+          <div>
+           <h3 className="h3-text">Відновлення логіна</h3>
+              <p className="divv">
+              На вказаний email було відправлено лист з інструкцією по відновленню вашого логіна.
+              </p>
+              <p className="divv">
+                Якщо Ви не бачите лист в поштовій скриньці, спробуйте перевірити спам-папку. Або скористайтесь формою відновлення логіна ще раз.
+              </p>
+          </div>
+      )  : isadditionalContent2  ? (
+        <div>
+         <h3 className="h3-text">Відновлення паролю</h3>
+            <p className="divv">
+            На вказаний email було відправлено лист з інструкцією по відновленню вашого пароля.
+            </p>
+            <p className="divv">
+              Якщо Ви не бачите лист в поштовій скриньці, спробуйте перевірити спам-папку. Або скористайтесь формою відновлення пароля ще раз.
+            </p>
+        </div>
+     ) : (
           <>
             <div className="frame-wrapper11">
               <div className="parent">
@@ -239,7 +288,7 @@ const Authorization = () => {
                   type={passwordType}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                />
+                  />
                 <img
                   className="image-22-icon1"
                   alt=""
@@ -252,11 +301,11 @@ const Authorization = () => {
             <div className="frame-group-auth">
               <div className="frame-div-auth">
                 <div className="group">
-                <div className="div1-auth">Забули ваш 
-    <span onClick={() => setIsLoginRecovery(true)}> Логін </span> 
-    чи 
-    <span onClick={handlePasswordRecoveryClick}> Пароль? </span>
-  </div>
+                  <div className="div1-auth">Забули ваш
+                    <span onClick={() => setIsLoginRecovery(true)}> Логін </span>
+                    чи
+                    <span onClick={handlePasswordRecoveryClick}> Пароль? </span>
+                  </div>
                   <img
                     className="image-37-icon"
                     loading="lazy"
@@ -286,4 +335,3 @@ const Authorization = () => {
 };
 
 export default Authorization;
-

@@ -4,11 +4,11 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Home from "./Home";
 import Tracking from "./Tracking";
-// import Services from "./Services";
-// import Shop from "./Shop";
+import Services from "./Services";
+import Shop from "./Shop";
 // import Statistics from "./Statistics";
 
-const GeneralPage = ({ }) => {
+const GeneralPage = () => {
   const [activeComponent, setActiveComponent] = useState('home');
 
   const renderComponent = () => {
@@ -17,10 +17,10 @@ const GeneralPage = ({ }) => {
         return <Home />;
       case 'tracking':
         return <Tracking />;
-      // case 'services':
-      //   return <Services token={token} />;
-      // case 'shop':
-      //   return <Shop token={token} />;
+      case 'services':
+        return <Services  />;
+      case 'shop':
+        return <Shop  />;
       // case 'statistics':
       //   return <Statistics token={token} />;
       default:

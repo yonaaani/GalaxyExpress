@@ -132,6 +132,7 @@
   .dropdown-list-ul-home {
     padding: 5px;
     padding-left: 22px;
+    z-index: 10;
   }
 
   .history-tracking-h3 {

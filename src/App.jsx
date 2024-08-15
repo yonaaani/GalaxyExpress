@@ -76,7 +76,7 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/authorization" element={<Authorization />} />
       <Route path="/registration" element={<Registration />} />
-      <Route path="/passwordRecovery" element={<PasswordRecoveryPage />} />
+      <Route path="/reset-password" element={<PasswordRecoveryPage />} />
       <Route path="/loginRecovery" element={<LoginRecoveryPage />} />
       {token ? (
         <>

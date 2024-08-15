@@ -49,6 +49,18 @@
     top: 3px;
     margin-left: 20px;
   }
+
+  .password-reg3 {
+    flex: 1;
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    background-color: transparent;
+    top: 3px;
+    margin-left: 85px;
+  }
   .confirmationCode-reg {
     flex: 1;
     position: relative;

@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: row;
     gap: 50px;
-    margin-top: 30px;
+    margin-top: 20px;
   }
   .edit-profile-text {
     display: flex;
@@ -136,7 +136,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
   }
   .edit-page-contact-data {
     width: 100%;
@@ -191,8 +191,8 @@
     outline: none; 
     background-color: transparent;
     top: 2px;
-    margin-left: 110px;
-    width: 162px;
+    margin-left: 95px;
+    width: 166px;
     z-index: 7;
     color: #13152E;
   }
@@ -210,9 +210,13 @@
     z-index: 7;
     color: #13152E;
   }
+
   .calendar-image {
     width: 20px;
     height: 20px;
+    position: fixed;
+    margin-left: 350px;
+    margin-bottom: 10px;
   }
 
   .rectangle-parent-birthday {
@@ -231,6 +235,8 @@
     box-sizing: border-box;
     max-width: 100%;
     z-index: 10;
+    padding-right: 13px;
+
   }
 
   .react-datepicker {
@@ -267,7 +273,6 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .photo-download-text {
@@ -352,4 +357,135 @@ justify-content: center;
   width: 20px;
   height: 20px;
   margin-top: 1px;
+}
+
+.dropdown-container-gender {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-list-gender {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdown-list-ul-gender {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-list-li-gender {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-list-li-gender:hover {
+  background-color: #f1f1f1;
+}
+
+.text-frame-gender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: white;
+}
+.rectangle-parent2-editAccount {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  padding: 12px var(--padding-lgi) 12px
+    var(--padding-3xl);
+  gap: 10px;
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-300);
+  z-index: 8 !important;
+  margin-top: 355px;
+  border: 1px solid #55567E ;
+  width: 404px;
+}
+
+.dropdown-list-editAccount {
+  position: absolute;
+  left: -332px;
+  width: 345px;
+  background-color: #fff;
+  border: 2px solid #9499C3;
+  border-top: none;
+  z-index: 3;
+  max-height: 150px; 
+  overflow-y: auto;
+  border-radius: 0px 0px 10px 10px;
+  margin-top: 8px;
+}
+
+.sex-text-b {
+  font-size: 14px;
+  color: #9499C3;
+  margin-right: 15px;
+}
+.text-frame-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-5xs) 0 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.selector-gender {
+  width: 335px;
+  height: 35px;
+  border-radius: 7px;
+  border: 1px solid #9499C3;
+  padding: 5px;
+  padding-left: 10px;
+  -webkit-appearance: none; /* Використовуємо вендорний префікс для WebKit браузерів */
+  -moz-appearance: none; /* Використовуємо вендорний префікс для Mozilla браузерів */
+  appearance: none; /* Використовуємо нестандартний стиль */
+  padding-right: 40px; /* Відступ для стрілки */
+  background-image: url('C:/Users/yonaaani/OneDrive/Рабочий стол/GalaxyExpress/public/arrow-down.png'); /* Шлях до вашого нового значка */
+  background-repeat: no-repeat; /* Заборона повторення значка */
+  background-position: left center;
+  background-position-x: 305px;
+}
+
+.rectangle-parent-edit {
+  flex: 1;
+  border-radius: var(--br-6xs);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gainsboro-200);
+  padding: 5px 18px;
+  position: relative;
+  gap: 10px;
+  z-index: 4;
+}
+
+.rectangle-parent-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
 }
